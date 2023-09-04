@@ -7,7 +7,7 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chat_models.openai import ChatOpenAI
 from langchain.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
-#from langchain.chains import ConversationalRetrievalChain
+from langchain.chains import ConversationalRetrievalChain
 from langchain.chains import RetrievalQAWithSourcesChain
 from htmlTemplates import css, bot_template, user_template
 langchain.verbose = False
@@ -47,8 +47,7 @@ def get_conversation_chain(vectorstore):
         llm = llm,
         chain_type="stuff", 
         retriever=vectorstore.as_retriever(),
-        memory=memory,
-        reduce_k_below_max_tokens=True
+        memory=memory
     )
     # conversation_chain = RetrievalQAWithSourcesChain.from_chain_type(
     #     llm=llm, 
